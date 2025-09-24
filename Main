@@ -1,0 +1,32 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from pandas import DataFrame
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.metrics import r2_score, mean_squared_error
+import json
+
+excel_path = 'Channel 2 Data Jan 16 2025.xlsx'
+df = pd.read_excel(excel_path, sheet_name = "RawData_2_1", header = 0)
+
+object1 = df.filter(like="Cycle_Index")
+#object1 = pd.to_numeric(df["Cycle_Index"], errors="coerce")
+print(object1.head())
+
+object2 = df.filter(like="Discharge_Capacity(Ah)")
+#object2 = pd.to_numeric(df["Discharge_Capacity(Ah)"], errors="coerce")
+
+print(object2.head())
+#print(df.columns.tolist())
+
+X = object1
+Y = object2
+print(df.columns.tolist())
+
+
+plt.plot(X, Y, marker = 'o', color = 'blue')
+plt.xlabel("Cycle index")
+plt.ylabel("Discharge_Capacity(Ah)")
+plt.title("Cycle index vs. Discharge_Capacity(Ah)")
+plt.show()
